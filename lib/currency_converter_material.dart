@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CurrencyConverterMaterialPage extends StatelessWidget {
   const CurrencyConverterMaterialPage({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //? Can define any variable here, setting up it's properties and using it further.
     return const Scaffold(
       backgroundColor: Colors.blueGrey,
       body: Center(
@@ -22,14 +22,28 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
             ),
             TextField(
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
               ),
               decoration: InputDecoration(
                 // label: Text('Please Enter the amount in INR',style: TextStyle(color: Colors.white),),
                 hintText: 'Please enter the amount in USD',
                 hintStyle: TextStyle(
-                  color: Colors.white60,
+                  color: Colors.black,
                 ),
+                prefixIcon: Icon(Icons.monetization_on) ,//? Can use IconData for advance processes
+                prefixIconColor: Colors.black,
+                filled: true,
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 2.0,
+                    style: BorderStyle.solid,
+                    strokeAlign: BorderSide.strokeAlignOutside,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(60)), //? Here, we can also use just BorderRadius.circular()
+                ),
+                enabledBorder: UnderlineInputBorder() //? Adds underlined border at bottom.
               ),
             ), //? Used for adding input.
           ],
