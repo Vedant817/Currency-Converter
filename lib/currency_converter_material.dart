@@ -1,8 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyConverterMaterialPage extends StatelessWidget {
+//? We have two classes here because we can't create mutable variables inside the class.
+class CurrencyConverterMaterialPage extends StatefulWidget {
   const CurrencyConverterMaterialPage({super.key});
+
+  @override
+  State<CurrencyConverterMaterialPage> createState() =>
+      _CurrencyConverterMaterialPageState();
+}
+
+class _CurrencyConverterMaterialPageState
+    extends State<CurrencyConverterMaterialPage> {
+  double result = 0;
+  final TextEditingController textEditingController =
+      TextEditingController(); //? Used to make the use of value input.
+  @override
+  void initState() {
+    //? For assigning values like futures, it can be done inside the initState.
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +35,13 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
       body: Center(
         child: Column(
           //? To add different types of field.
-          mainAxisAlignment: MainAxisAlignment.center, //? Vertically
+          mainAxisAlignment: MainAxisAlignment.center,
+          //? Vertically
           // crossAxisAlignment: CrossAxisAlignment.center, //* Avoided because we are using Column
           children: [
-            const Text(
-              '0',
-              style: TextStyle(
+            Text(
+              'INR ${result.toStringAsFixed(2)}',
+              style: const TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -34,11 +51,12 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
               //? Can also use Padding to set various values.
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(10),
-              child: const TextField(
-                style: TextStyle(
+              child: TextField(
+                controller: textEditingController,
+                style: const TextStyle(
                   color: Colors.black,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   // label: Text('Please Enter the amount in INR',style: TextStyle(color: Colors.white),),
                   hintText: 'Please enter the amount in USD',
                   hintStyle: TextStyle(
@@ -62,7 +80,7 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
                   enabledBorder:
                       UnderlineInputBorder(), //? Adds underlined border at bottom.
                 ),
-                keyboardType: TextInputType.numberWithOptions(
+                keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                     signed:
                         true), //? Allows to add only that particular data type.
@@ -73,9 +91,9 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
                 onPressed: () {
-                  if (kDebugMode) {
-                    print('Button Clicked');
-                  }
+                  setState(() { //? Helps in rebuilt of the required functions.
+                    result = double.parse(textEditingController.text) * 81;
+                  });
                 },
                 style: ButtonStyle(
                   elevation: const MaterialStatePropertyAll(15),
